@@ -2,8 +2,8 @@ FROM eclipse-temurin:20-jdk as build
 WORKDIR /app
 # Copy your application source code and build it
 COPY . .
+RUN chmod +x gradlew
 RUN ./gradlew bootJar
-#RUN chmod +x gradlew
 #RUN ./gradlew clean
 #RUN ./gradlew build
 
