@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk16-openj9 as build
+FROM openjdk:16 as build
 WORKDIR /app
 # Copy your application source code and build it
 COPY . .
@@ -7,7 +7,7 @@ RUN ./gradlew clean
 RUN ./gradlew build
 
 # Stage 2: Create the final image
-FROM adoptopenjdk/openjdk16-openj9
+FROM openjdk:16
 WORKDIR /app
 # Copy the built JAR from the build stage
 COPY --from=build /app/build/libs/MyBooks.jar app.jar
