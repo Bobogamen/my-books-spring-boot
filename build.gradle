@@ -7,7 +7,7 @@ plugins {
 group = 'com'
 
 java {
-	sourceCompatibility = '17'
+	sourceCompatibility = '16'
 }
 
 repositories {
