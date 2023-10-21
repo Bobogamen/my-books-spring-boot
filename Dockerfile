@@ -1,4 +1,4 @@
-FROM openjdk:16 as build
+FROM adoptopenjdk:16-jdk-hotspot as build
 WORKDIR /app
 # Copy your application source code and build it
 COPY . .
