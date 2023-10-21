@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://mybooks.railway.internal")
+@CrossOrigin(origins = "https://mybooks.up.railway.app")
 public class MainController {
 
     private final BookService bookService;
