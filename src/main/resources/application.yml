@@ -28,7 +28,7 @@ spring:
   sql:
     init:
       mode: never
-#  web:
-#    resources:
-#      static-locations:
-#        - classpath:/public/
+  web:
+    resources:
+      static-locations:
+        - classpath:/public/
