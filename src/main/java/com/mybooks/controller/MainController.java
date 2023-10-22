@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "https://mybooks.railway.internal")
-//@CrossOrigin(origins = {"https://mybooks.up.railway.app", "http://localhost:3000"})
+@CrossOrigin(origins = {"https://mybooks.railway.internal", "https://mybooks.up.railway.app", "http://localhost:3000"})
 public class MainController {
 
     private final BookService bookService;
@@ -63,7 +62,7 @@ public class MainController {
     @PostMapping("/add-author")
     public boolean addAuthor(@RequestBody String name) {
         if (name.isBlank() || name.length() < 3) {
-            return  false;
+            return false;
         }
 
         return this.authorService.addAuthor(name);
