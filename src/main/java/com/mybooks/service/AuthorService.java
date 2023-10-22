@@ -6,6 +6,7 @@ import com.mybooks.repository.AuthorRepository;
 import com.mybooks.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,7 +30,8 @@ public class AuthorService {
 
             return author;
 
-        }).collect(Collectors.toList());
+        }).sorted(Comparator.comparing(AuthorDTO::getName)).
+                collect(Collectors.toList());
     }
 
     public AuthorDTO getAuthor(long id) {
@@ -43,7 +45,7 @@ public class AuthorService {
         return authorDTO;
     }
 
-    public String addAuthor(String name) {
+    public boolean addAuthor(String name) {
         name = name.replaceAll("\\+", " ");
 
         Author author = new Author();
@@ -51,7 +53,7 @@ public class AuthorService {
 
         this.authorRepository.save(author);
 
-        return name;
+        return true;
     }
 
     public boolean deleteAuthorByIdAndHisBooks(long authorId) {

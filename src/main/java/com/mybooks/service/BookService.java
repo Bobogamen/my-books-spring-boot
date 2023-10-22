@@ -3,6 +3,7 @@ package com.mybooks.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mybooks.model.entity.Author;
 import com.mybooks.model.entity.Book;
 import com.mybooks.repository.AuthorRepository;
 import com.mybooks.repository.BookRepository;
@@ -34,7 +35,14 @@ public class BookService {
     public boolean addBook(String title, long authorId) {
         Book newBook = new Book();
         newBook.setTitle(title);
-        newBook.setAuthor(this.authorRepository.getAuthorById(authorId));
+
+        Author author = this.authorRepository.getAuthorById(authorId);
+
+        if (author == null) {
+            return  false;
+        }
+
+        newBook.setAuthor(author);
 
         this.bookRepository.save(newBook);
 
