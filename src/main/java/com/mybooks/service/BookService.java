@@ -24,7 +24,7 @@ public class BookService {
     }
     public List<Book> getAllBooks() {
         return this.bookRepository.findAll().stream()
-                .sorted(Comparator.comparing(Book::getTitle)).
+                .sorted(Comparator.comparing(a -> a.getAuthor().getName())).
                 toList();
     }
 
@@ -54,15 +54,19 @@ public class BookService {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(book);
 
-        int bookId = jsonNode.get("id").asInt();
-        String title = jsonNode.get("title").asText();
-        int authorId = jsonNode.get("author").get("id").asInt();
+        try {
+            int bookId = jsonNode.get("id").asInt();
+            String title = jsonNode.get("title").asText();
+            int authorId = jsonNode.get("author").get("id").asInt();
 
-        Book bookForEdit = this.bookRepository.getBookById(bookId);
-        bookForEdit.setTitle(title);
-        bookForEdit.setAuthor(this.authorRepository.getAuthorById(authorId));
+            Book bookForEdit = this.bookRepository.getBookById(bookId);
+            bookForEdit.setTitle(title);
+            bookForEdit.setAuthor(this.authorRepository.getAuthorById(authorId));
+            this.bookRepository.save(bookForEdit);
 
-        this.bookRepository.save(bookForEdit);
+        } catch (Exception exception) {
+            return false;
+        }
 
         return true;
     }
