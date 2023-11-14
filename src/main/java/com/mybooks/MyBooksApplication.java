@@ -3,12 +3,14 @@ package com.mybooks;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @SpringBootApplication
+@EnableScheduling
 public class MyBooksApplication {
 
 	@Bean
