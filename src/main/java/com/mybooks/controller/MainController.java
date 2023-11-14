@@ -7,7 +7,7 @@ import com.mybooks.service.AuthorService;
 import com.mybooks.service.BookService;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class MainController {
     @GetMapping("/books")
     public List<Book> getAllBooks() {
         System.out.println("Response sent at: " +
-                LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm:ss")));
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm:ss")));
         return this.bookService.getAllBooks();
     }
 

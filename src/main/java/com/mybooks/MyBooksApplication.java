@@ -5,6 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @SpringBootApplication
 public class MyBooksApplication {
 
@@ -15,6 +18,6 @@ public class MyBooksApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MyBooksApplication.class, args);
-		System.out.println("My Books is started successfully!");
+		System.out.println("My Books is successfully at " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm:ss")));
 	}
 }

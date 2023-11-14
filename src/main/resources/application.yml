@@ -1,13 +1,3 @@
-logging:
-  level:
-    org:
-      hibernate:
-        SQL: ERROR
-        type:
-          descriptor: ERROR
-      nodeValue: WARN
-      springframework:
-        security: ERROR
 server:
   port: 8080
 spring:
