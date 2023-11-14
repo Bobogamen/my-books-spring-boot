@@ -16,7 +16,7 @@ public class TrafficSimulator {
         this.restTemplate = restTemplate;
     }
 
-    @Scheduled(cron = "*/13 7,23 * * *", zone = "Europe/Sofia")
+    @Scheduled(cron = "0 */13 * * * *", zone = "Europe/Sofia")
     public void sendGetRequest() {
         String URL = "https://my-books-server.onrender.com/books";
 
