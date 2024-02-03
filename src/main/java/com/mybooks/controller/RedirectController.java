@@ -12,10 +12,10 @@ public class RedirectController {
     @RequestMapping("/**")  // Handle all requests
     public String redirectToTarget(HttpServletRequest request) {
 
-        if (request.getRequestURI().contains("book")) {
+        if (request.getRequestURL().toString().contains("book")) {
             String redirectUrl = "https://mybooksbg.netlify.app";
             return "redirect:" + redirectUrl;
-        } else if (request.getRequestURI().contains("destiny")) {
+        } else if (request.getRequestURL().toString().contains("destiny")) {
             String redirectUrl = "https://destiny-library.netlify.app";
             return "redirect:" + redirectUrl;
         } else {
