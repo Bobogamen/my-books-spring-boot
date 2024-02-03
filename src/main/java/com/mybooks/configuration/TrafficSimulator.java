@@ -18,12 +18,14 @@ public class TrafficSimulator {
 
     @Scheduled(cron = "0 */13 * * * *")
     public void sendGetRequest() {
-        String URL = "https://my-books-server.onrender.com/books";
+        String[] urls = {"https://my-books-server.onrender.com/books",
+                "https://destiny-library-server.onrender.com"};
 
-        restTemplate.getForObject(URL, String.class);
+        for (String url : urls) {
+            restTemplate.getForObject(url, String.class);
+            System.out.println("Wakeup request successfully sent at: " +
+                    LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm:ss")));
 
-        System.out.println("Wakeup request successfully sent at: " +
-                LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm:ss")));
-
+        }
     }
 }

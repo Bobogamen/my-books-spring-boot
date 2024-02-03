@@ -12,8 +12,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"https://mybooks.railway.internal", "https://mybooks.up.railway.app", "https://mybooksbg.netlify.app", "http://localhost:3000"})
-//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000",
+        "https://mybooksbg.netlify.app",
+        "https://destiny-library.netlify.app"})
+
 public class MainController {
 
     private final BookService bookService;
