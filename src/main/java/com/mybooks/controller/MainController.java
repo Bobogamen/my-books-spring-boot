@@ -28,8 +28,6 @@ public class MainController {
 
     @GetMapping("/books")
     public List<Book> getAllBooks() {
-        System.out.println("Response sent at: " +
-                LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm:ss")));
         return this.bookService.getAllBooks();
     }
 
