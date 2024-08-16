@@ -1,5 +1,6 @@
 package com.mybooks.service;
 
+import com.mybooks.model.dto.ListAuthorsDTO;
 import com.mybooks.model.entity.Author;
 import com.mybooks.model.dto.AuthorDTO;
 import com.mybooks.repository.AuthorRepository;
@@ -21,16 +22,16 @@ public class AuthorService {
         this.bookRepository = bookRepository;
     }
 
-    public List<AuthorDTO> getAllAuthors() {
+    public List<ListAuthorsDTO> getAllAuthors() {
         return this.authorRepository.findAll().stream().map(a -> {
-            AuthorDTO author = new AuthorDTO();
-            author.setId(a.getId());
-            author.setName(a.getName());
-            author.setBooks(this.bookRepository.getBooksByAuthorId(a.getId()));
+                    ListAuthorsDTO author = new ListAuthorsDTO();
+                    author.setId(a.getId());
+                    author.setName(a.getName());
+                    author.setBooks(this.bookRepository.getBooksByAuthorId(a.getId()).size());
 
-            return author;
+                    return author;
 
-        }).sorted(Comparator.comparing(AuthorDTO::getName)).
+                }).sorted(Comparator.comparing(ListAuthorsDTO::getName)).
                 collect(Collectors.toList());
     }
 
@@ -48,12 +49,16 @@ public class AuthorService {
     public boolean addAuthor(String name) {
         name = name.replaceAll("\\+", " ");
 
+        if (this.authorRepository.findAuthorByNameIgnoreCase(name).isPresent()) {
+            return true;
+        }
+
         Author author = new Author();
         author.setName(name);
 
         this.authorRepository.save(author);
 
-        return true;
+        return false;
     }
 
     public boolean deleteAuthorByIdAndHisBooks(long authorId) {
@@ -67,5 +72,9 @@ public class AuthorService {
         Author author = this.authorRepository.getAuthorById(id);
         author.setName(name);
         return this.authorRepository.save(author).getName();
+    }
+
+    public List<ListAuthorsDTO> findAuthorByName(String word) {
+        return this.authorRepository.findAuthorByName(word);
     }
 }

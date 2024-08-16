@@ -1,6 +1,8 @@
 package com.mybooks.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.mybooks.model.dto.ListAuthorsDTO;
+import com.mybooks.model.dto.SearchResponse;
 import com.mybooks.model.entity.Book;
 import com.mybooks.model.dto.AuthorDTO;
 import com.mybooks.service.AuthorService;
@@ -55,7 +57,7 @@ public class MainController {
     }
 
     @GetMapping("/authors")
-    public List<AuthorDTO> getAllAuthors() {
+    public List<ListAuthorsDTO> getAllAuthors() {
         return this.authorService.getAllAuthors();
     }
 
@@ -67,7 +69,7 @@ public class MainController {
     @PostMapping("/add-author")
     public boolean addAuthor(@RequestBody String name) {
         if (name.isBlank() || name.length() < 3) {
-            return false;
+            return true;
         }
 
         return this.authorService.addAuthor(name);
@@ -84,8 +86,8 @@ public class MainController {
     }
 
     @PostMapping("/search")
-    public List<Book> search(@RequestParam String word) {
-        return this.bookService.searchBook(word);
+    public SearchResponse search(@RequestParam String word) {
+        return new SearchResponse(this.authorService.findAuthorByName(word), this.bookService.searchBook(word));
     }
 
 }

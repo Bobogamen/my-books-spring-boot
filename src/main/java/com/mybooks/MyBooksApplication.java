@@ -10,16 +10,16 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @SpringBootApplication
-@EnableScheduling
+//@EnableScheduling
 public class MyBooksApplication {
 
-	@Bean
-	public RestTemplate restTemplate() {
-		return new RestTemplate();
-	}
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(MyBooksApplication.class, args);
-		System.out.println("Server successfully started at " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm:ss")));
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MyBooksApplication.class, args);
+        System.out.println("Server successfully started at " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm:ss")));
+    }
 }
