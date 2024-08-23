@@ -69,11 +69,12 @@ public class MainController {
     @PostMapping("/add-author")
     public boolean addAuthor(@RequestBody String name) {
         if (name.isBlank() || name.length() < 3) {
-            return true;
+            return false;
         }
 
         return this.authorService.addAuthor(name);
     }
+
 
     @PostMapping("/edit-author")
     public String editAuthor(@RequestParam long id, @RequestParam String name) {

@@ -50,7 +50,7 @@ public class AuthorService {
         name = name.replaceAll("\\+", " ");
 
         if (this.authorRepository.findAuthorByNameIgnoreCase(name).isPresent()) {
-            return true;
+            return false;
         }
 
         Author author = new Author();
@@ -58,8 +58,9 @@ public class AuthorService {
 
         this.authorRepository.save(author);
 
-        return false;
+        return true;
     }
+
 
     public boolean deleteAuthorByIdAndHisBooks(long authorId) {
         bookRepository.deleteAll(this.bookRepository.getBooksByAuthorId(authorId));
